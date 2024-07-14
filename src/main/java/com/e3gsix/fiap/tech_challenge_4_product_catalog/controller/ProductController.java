@@ -1,8 +1,13 @@
 package com.e3gsix.fiap.tech_challenge_4_product_catalog.controller;
 
 import com.e3gsix.fiap.tech_challenge_4_product_catalog.dto.ProductCreationRequestDTO;
+import com.e3gsix.fiap.tech_challenge_4_product_catalog.dto.ProductFindByIdResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +28,17 @@ public interface ProductController {
     );
 
     @Operation(summary = "Buscar um produto pelo ID.")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            content = {
+                                    @Content(
+                                            mediaType = "application/json",
+                                            schema = @Schema(implementation = ProductFindByIdResponseDTO.class))
+                            }
+                    )
+            }
+    )
     @ResponseStatus(HttpStatus.OK)
     ResponseEntity findById(
             @Parameter(description = "ID do produto a ser consultado.") String productId
