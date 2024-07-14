@@ -48,4 +48,22 @@ public class Product {
             throw new IllegalArgumentException("Quantidade de produtos não podem ser negativas.");
         }
     }
+
+    public void reduceQuantity(BigInteger quantity) {
+        if (quantity.compareTo(BigInteger.ZERO) < 0) {
+            throw new IllegalArgumentException("Quantidades negativas não são permitidas.");
+        } else if (this.quantity.subtract(quantity).compareTo(BigInteger.ZERO) < 0) {
+            throw new IllegalArgumentException("Estoque insuficiente.");
+        } else {
+            this.quantity = this.quantity.subtract(quantity);
+        }
+    }
+
+    public void includeQuantity(BigInteger quantity) {
+        if (quantity.compareTo(BigInteger.ZERO) < 0) {
+            throw new IllegalArgumentException("Quantidades negativas não são permitidas.");
+        } else {
+            this.quantity = this.quantity.add(quantity);
+        }
+    }
 }
