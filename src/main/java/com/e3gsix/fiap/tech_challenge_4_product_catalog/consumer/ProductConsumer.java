@@ -5,8 +5,7 @@ import com.e3gsix.fiap.tech_challenge_4_product_catalog.dto.StockProductUpdateRe
 import com.e3gsix.fiap.tech_challenge_4_product_catalog.service.ProductService;
 import com.e3gsix.fiap.tech_challenge_4_product_catalog.utils.StringUtil;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -14,9 +13,9 @@ import java.util.UUID;
 import java.util.function.Consumer;
 
 @Component
+@Slf4j
 @RequiredArgsConstructor
 public class ProductConsumer {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final ProductService service;
 
@@ -25,11 +24,11 @@ public class ProductConsumer {
         return event -> {
             UUID justInMemoryID = UUID.randomUUID();
 
-            logger.info("Event input [{}]: {}", justInMemoryID, StringUtil.toStringWithNoClassName(event));
+            log.info("Event input [{}]: {}", justInMemoryID, StringUtil.toStringWithNoClassName(event));
 
             StockProductUpdateResponseDTO result = service.updateStock(event);
 
-            logger.info("Event output [{}]: {}", justInMemoryID, StringUtil.toStringWithNoClassName(result));
+            log.info("Event output [{}]: {}", justInMemoryID, StringUtil.toStringWithNoClassName(result));
         };
     }
 }
