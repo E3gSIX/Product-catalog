@@ -39,7 +39,7 @@ public class ProductControllerImpl implements ProductController {
 
     @GetMapping(URI_FIND_PRODUCT_BY_ID)
     @Override
-    public ResponseEntity findById(Long productId) {
+    public ResponseEntity findById(@PathVariable String productId) {
         ProductFindByIdResponseDTO productFindByIdResponseDTO = this.service.findById(productId);
         return null;
     }

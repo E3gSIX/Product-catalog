@@ -27,14 +27,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductFindByIdResponseDTO findById(Long productId) {
+    public ProductFindByIdResponseDTO findById(String productId) {
         Product product = this.repository.findById(productId)
                 .orElseThrow(() -> createNotFound(productId));
 
         return ProductFindByIdResponseDTO.fromModel(product);
     }
 
-    private UnsupportedOperationException createNotFound(Long productId) {
+    private UnsupportedOperationException createNotFound(String productId) {
         return new UnsupportedOperationException("Produto com o ID " + productId + " não foi encontrado.");
     }
 }

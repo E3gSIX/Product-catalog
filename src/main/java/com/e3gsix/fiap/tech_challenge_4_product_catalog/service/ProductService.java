@@ -7,5 +7,5 @@ import com.e3gsix.fiap.tech_challenge_4_product_catalog.dto.ProductFindByIdRespo
 public interface ProductService {
     ProductCreationResponseDTO create(ProductCreationRequestDTO product);
 
-    ProductFindByIdResponseDTO findById(Long productId);
+    ProductFindByIdResponseDTO findById(String productId);
 }

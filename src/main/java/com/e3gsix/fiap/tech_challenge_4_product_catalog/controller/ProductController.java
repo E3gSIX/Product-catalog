@@ -25,6 +25,6 @@ public interface ProductController {
     @Operation(summary = "Buscar um produto pelo ID.")
     @ResponseStatus(HttpStatus.OK)
     ResponseEntity findById(
-            @Parameter(description = "ID do produto a ser consultado.") Long productId
+            @Parameter(description = "ID do produto a ser consultado.") String productId
     );
 }
