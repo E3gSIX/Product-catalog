@@ -1,14 +1,15 @@
 package com.e3gsix.fiap.tech_challenge_4_product_catalog.service.impl;
 
+import com.e3gsix.fiap.tech_challenge_4_product_catalog.consumer.StockActionEnum;
 import com.e3gsix.fiap.tech_challenge_4_product_catalog.controller.exception.NotFoundException;
-import com.e3gsix.fiap.tech_challenge_4_product_catalog.dto.ProductCreationRequestDTO;
-import com.e3gsix.fiap.tech_challenge_4_product_catalog.dto.ProductCreationResponseDTO;
-import com.e3gsix.fiap.tech_challenge_4_product_catalog.dto.ProductFindByIdResponseDTO;
+import com.e3gsix.fiap.tech_challenge_4_product_catalog.dto.*;
 import com.e3gsix.fiap.tech_challenge_4_product_catalog.model.Product;
 import com.e3gsix.fiap.tech_challenge_4_product_catalog.repository.ProductRepository;
 import com.e3gsix.fiap.tech_challenge_4_product_catalog.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.math.BigInteger;
 
 @Service
 @RequiredArgsConstructor
@@ -35,7 +36,25 @@ public class ProductServiceImpl implements ProductService {
         return ProductFindByIdResponseDTO.fromModel(product);
     }
 
+    @Override
+    public StockProductUpdateResponseDTO updateStock(StockProductUpdateRequestDTO stockProduct) {
+        Product product = this.repository.findById(stockProduct.productId())
+                .orElseThrow(() -> createNotFound(stockProduct.productId()));
+
+        BigInteger oldQuantity = product.getQuantity();
+
+        if (StockActionEnum.get(stockProduct.action()).isRemoving()) {
+            product.reduceQuantity(stockProduct.quantity());
+        } else {
+            product.includeQuantity(stockProduct.quantity());
+        }
+
+        Product updatedProduct = this.repository.save(product);
+
+        return StockProductUpdateResponseDTO.fromModel(updatedProduct, oldQuantity);
+    }
+
     private NotFoundException createNotFound(String productId) {
-        return new NotFoundException("Produto com o ID " + productId + " não foi encontrado.");
+        return new NotFoundException(String.format("Produto com o ID '%s' não foi encontrado.", productId));
     }
 }
