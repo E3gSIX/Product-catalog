@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.time.LocalDate;
 
 @Document
 @Getter
@@ -24,6 +25,7 @@ public class Product {
     private BigDecimal price;
     private TypeEnum type;
     private BigInteger quantity;
+    private LocalDate createdAt;
 
     public void validate() {
         if (this.name == null || this.name.isEmpty()) {
