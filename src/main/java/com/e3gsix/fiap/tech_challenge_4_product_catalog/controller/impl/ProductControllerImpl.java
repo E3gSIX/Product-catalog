@@ -18,7 +18,7 @@ import static com.e3gsix.fiap.tech_challenge_4_product_catalog.controller.impl.P
 public class ProductControllerImpl implements ProductController {
 
     public static final String URI_PRODUCTS = "/products";
-    public static final String URI_FIND_PRODUCT_BY_ID = "/products/{productId}";
+    public static final String URI_FIND_PRODUCT_BY_ID = "/{productId}";
 
     private final ProductService service;
 
@@ -41,6 +41,6 @@ public class ProductControllerImpl implements ProductController {
     @Override
     public ResponseEntity findById(@PathVariable String productId) {
         ProductFindByIdResponseDTO productFindByIdResponseDTO = this.service.findById(productId);
-        return null;
+        return ResponseEntity.ok(productFindByIdResponseDTO);
     }
 }
