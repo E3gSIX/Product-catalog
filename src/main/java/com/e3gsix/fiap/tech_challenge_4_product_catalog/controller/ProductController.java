@@ -18,7 +18,7 @@ public interface ProductController {
     @Operation(summary = "Criar um produto.")
     @ResponseStatus(HttpStatus.CREATED)
     ResponseEntity create(
-            @Parameter(description = "Descrição do produto a ser criado.") ProductCreationRequestDTO productCreationRequestDTO,
+            @Parameter(description = "Atributos do produto a ser criado.") ProductCreationRequestDTO productCreationRequestDTO,
             @Parameter(hidden = true) UriComponentsBuilder uriComponentsBuilder
     );
 
