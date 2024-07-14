@@ -1,5 +1,6 @@
 package com.e3gsix.fiap.tech_challenge_4_product_catalog.service.impl;
 
+import com.e3gsix.fiap.tech_challenge_4_product_catalog.controller.exception.NotFoundException;
 import com.e3gsix.fiap.tech_challenge_4_product_catalog.dto.ProductCreationRequestDTO;
 import com.e3gsix.fiap.tech_challenge_4_product_catalog.dto.ProductCreationResponseDTO;
 import com.e3gsix.fiap.tech_challenge_4_product_catalog.dto.ProductFindByIdResponseDTO;
@@ -34,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
         return ProductFindByIdResponseDTO.fromModel(product);
     }
 
-    private UnsupportedOperationException createNotFound(String productId) {
-        return new UnsupportedOperationException("Produto com o ID " + productId + " não foi encontrado.");
+    private NotFoundException createNotFound(String productId) {
+        return new NotFoundException("Produto com o ID " + productId + " não foi encontrado.");
     }
 }
