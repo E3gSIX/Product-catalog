@@ -30,7 +30,7 @@ public class ProductControllerImpl implements ProductController {
     ) {
         ProductCreationResponseDTO productCreationResponseDTO = this.service.create(productCreationRequestDTO);
 
-        var uri = uriComponentsBuilder.path(URI_FIND_PRODUCT_BY_ID)
+        var uri = uriComponentsBuilder.path(URI_PRODUCTS + URI_FIND_PRODUCT_BY_ID)
                 .buildAndExpand(productCreationResponseDTO.id())
                 .toUri();
 
