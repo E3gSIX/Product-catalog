@@ -18,6 +18,8 @@ services:
       DB_URL: '${DB_URL}'
     ports:
       - "8081:8081"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       - mongo
     restart: always
